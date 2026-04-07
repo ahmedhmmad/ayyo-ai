@@ -95,6 +95,27 @@
 - **FR-006**: System MUST authenticate users via [NEEDS CLARIFICATION: auth method not specified - email/password, SSO, OAuth?]
 - **FR-007**: System MUST retain user data for [NEEDS CLARIFICATION: retention period not specified]
 
+### Constitution Alignment *(mandatory)*
+
+- **CA-001 Code Quality**: Specify TypeScript strict-mode frontend requirements and typed FastAPI/
+  Pydantic backend contracts for this feature.
+- **CA-002 Layer Boundaries**: Identify service/domain ownership and confirm route handlers only
+  orchestrate.
+- **CA-003 Testing**: Define required unit/integration/regression tests, including critical-path
+  coverage impact and persona drift protection where AI prompts are involved.
+- **CA-004 Personality Safety**: If AI output is user-visible, define how personality enforcement
+  and tone guard are applied before rendering.
+- **CA-005 Memory Integration**: If user context is relevant, define memory reads/writes through
+  MemoryService and describe how memory influences responses.
+- **CA-005a Identity Scoping**: Define Supabase Auth identity usage and ensure memory records are
+  scoped to authenticated user IDs.
+- **CA-006 UX Quality**: Include expected loading/error/empty states and consistency expectations for
+  chat/voice interactions if present.
+- **CA-007 Performance**: Define response streaming behavior and measurable latency/performance
+  expectations relevant to the feature.
+- **CA-008 Configuration Governance**: List required environment variables/config and confirm no
+  hardcoded secrets or model/provider values.
+
 ### Key Entities *(include if feature involves data)*
 
 - **[Entity 1]**: [What it represents, key attributes without implementation]

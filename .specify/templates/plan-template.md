@@ -31,7 +31,29 @@
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+- Verify code-quality architecture rules are planned:
+  - React + TypeScript strict mode for frontend scope.
+  - FastAPI + typed Pydantic contracts for backend scope.
+  - No business logic in route handlers; service/domain ownership is explicit.
+  - File decomposition strategy exists for modules expected to exceed 300 lines.
+- Verify test strategy coverage before implementation:
+  - Backend service unit tests and interactive frontend integration tests are planned.
+  - Critical paths (memory, AI pipeline, personality layer) preserve >=80% coverage.
+  - Prompt/persona regression testing approach is defined.
+- Verify AI/personality/memory architecture:
+  - No raw LLM output reaches users; personality enforcement layer is required.
+  - MemoryService mediates all memory reads/writes; structured memory schema is defined.
+  - Supabase Auth is the user identity authority for memory access.
+  - Memory records are scoped and queried by authenticated user ID.
+  - Multi-agent-ready abstraction is defined (KNOX as Agent 1 of N).
+- Verify UX/performance constraints are designed:
+  - Streaming responses (no blocking full-output wait).
+  - FMP target <=2s and approach for measuring it.
+  - Non-functional UI states (loading/error/empty) included.
+- Verify boundary and delivery governance:
+  - Frontend never calls LLM providers directly.
+  - Environment config comes from .env schema, not hardcoded values.
+  - Infrastructure remains deployable for a single developer unless exception is justified.
 
 ## Project Structure
 
