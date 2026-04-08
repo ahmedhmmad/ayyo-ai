@@ -118,16 +118,16 @@
 
 ### Tests for User Story 3
 
-- [ ] T049 [P] [US3] Add API integration tests for in-chat guidance generation prompts in apps/api/tests/integration/test_guidance_generation.py
-- [ ] T050 [P] [US3] Add frontend integration tests for structured guidance message rendering in apps/web/tests/integration/guidance_in_chat.test.tsx
+- [X] T049 [P] [US3] Add API integration tests for in-chat guidance generation prompts in apps/api/tests/integration/test_guidance_generation.py
+- [X] T050 [P] [US3] Add frontend integration tests for structured guidance message rendering in apps/web/tests/integration/guidance_in_chat.test.tsx
 
 ### Implementation for User Story 3
 
-- [ ] T051 [US3] Implement guidance generation service (chat-delivered structure only) in apps/api/app/services/guidance_service.py
-- [ ] T052 [P] [US3] Add pytest unit tests for guidance service personalization rules in apps/api/tests/unit/test_guidance_service.py
-- [ ] T053 [US3] Integrate guidance service into chat orchestration pipeline in apps/api/app/services/chat_service.py
-- [ ] T054 [P] [US3] Add pytest unit tests for chat+guidance orchestration in apps/api/tests/unit/test_chat_guidance_orchestration.py
-- [ ] T055 [US3] Implement structured guidance message component with loading/error/empty states in apps/web/src/features/chat/components/GuidanceMessageCard.tsx
+- [X] T051 [US3] Implement guidance generation service (chat-delivered structure only) in apps/api/app/services/guidance_service.py
+- [X] T052 [P] [US3] Add pytest unit tests for guidance service personalization rules in apps/api/tests/unit/test_guidance_service.py
+- [X] T053 [US3] Integrate guidance service into chat orchestration pipeline in apps/api/app/services/chat_service.py
+- [X] T054 [P] [US3] Add pytest unit tests for chat+guidance orchestration in apps/api/tests/unit/test_chat_guidance_orchestration.py
+- [X] T055 [US3] Implement structured guidance message component with loading/error/empty states in apps/web/src/features/chat/components/GuidanceMessageCard.tsx
 
 **Checkpoint**: US3 is independently demoable and testable
 

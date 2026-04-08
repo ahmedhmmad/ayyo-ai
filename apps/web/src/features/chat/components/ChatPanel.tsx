@@ -1,6 +1,7 @@
 import { FormEvent, useEffect, useState } from "react";
 
 import { createChatStore } from "../state/chatStore";
+import { GuidanceMessageCard } from "./GuidanceMessageCard";
 
 type Props = {
   apiBaseUrl: string;
@@ -36,7 +37,16 @@ export function ChatPanel({ apiBaseUrl, token, sessionId }: Props) {
       )}
       <ul data-testid="chat-list">
         {store.messages.map((message, idx) => (
-          <li key={`${message.role}-${idx}`}>{`${message.role}: ${message.content}`}</li>
+          <li key={`${message.role}-${idx}`}>
+            {message.role === "assistant" && message.content.trim().startsWith("{") ? (
+              <>
+                <span>assistant: </span>
+                <GuidanceMessageCard content={message.content} loading={store.loading && idx === store.messages.length - 1} />
+              </>
+            ) : (
+              `${message.role}: ${message.content}`
+            )}
+          </li>
         ))}
       </ul>
       <form onSubmit={onSubmit}>
