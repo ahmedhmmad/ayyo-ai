@@ -35,6 +35,13 @@ class StreamChunk(BaseModel):
     done: bool
 
 
+class ConversationMessageOut(BaseModel):
+    session_id: UUID = Field(alias="sessionId")
+    user_id: UUID = Field(alias="userId")
+    role: str
+    content: str
+
+
 class MemoryRecord(BaseModel):
     id: UUID
     user_id: UUID
@@ -61,3 +68,4 @@ class CheckInOutcome(str, Enum):
 class CheckInResponseRequest(BaseModel):
     response_text: str = Field(alias="responseText", min_length=1)
     outcome: CheckInOutcome
+
