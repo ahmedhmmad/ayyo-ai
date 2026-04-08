@@ -16,14 +16,14 @@
 
 **Purpose**: Workspace bootstrap and configuration guards required before implementation
 
-- [ ] T001 Create monorepo app skeleton for API and web in apps/api and apps/web
-- [ ] T002 Create backend dependency manifest for FastAPI/Pydantic/Supabase/OpenAI in apps/api/pyproject.toml
-- [ ] T003 Create frontend dependency manifest for React/Vite/testing in apps/web/package.json
-- [ ] T004 Create root environment schema documentation (required before config-dependent tasks) in docs/env-schema.md
-- [ ] T005 [P] Create backend environment example with required variables in apps/api/.env.example
-- [ ] T006 [P] Create frontend environment example with required variables in apps/web/.env.example
-- [ ] T007 [P] Configure backend pytest defaults and markers in apps/api/pytest.ini
-- [ ] T008 [P] Configure frontend test runner and setup in apps/web/vitest.config.ts
+- [x] T001 Create monorepo app skeleton for API and web in apps/api and apps/web
+- [x] T002 Create backend dependency manifest for FastAPI/Pydantic/Supabase/OpenAI in apps/api/pyproject.toml
+- [x] T003 Create frontend dependency manifest for React/Vite/testing in apps/web/package.json
+- [x] T004 Create root environment schema documentation (required before config-dependent tasks) in docs/env-schema.md
+- [x] T005 [P] Create backend environment example with required variables in apps/api/.env.example
+- [x] T006 [P] Create frontend environment example with required variables in apps/web/.env.example
+- [x] T007 [P] Configure backend pytest defaults and markers in apps/api/pytest.ini
+- [x] T008 [P] Configure frontend test runner and setup in apps/web/vitest.config.ts
 
 ---
 
@@ -33,28 +33,28 @@
 
 **CRITICAL**: Complete this phase before starting user stories
 
-- [ ] T009 Create initial Supabase migration for identity-scoped core tables in apps/api/db/migrations/001_knox_core.sql
-- [ ] T010 Add row-level security policies for authenticated user_id scoping in apps/api/db/migrations/002_knox_rls.sql
-- [ ] T011 Implement Supabase auth dependency (magic-link only session validation) in apps/api/app/api/dependencies/auth.py
-- [ ] T012 [P] Add contract test for unauthorized and cross-user access rejection in apps/api/tests/integration/test_auth_scope.py
-- [ ] T013 Implement typed core entities for conversations/memory/check-ins in apps/api/app/schemas/core.py
-- [ ] T014 [P] Add schema validation tests for core entities in apps/api/tests/unit/test_core_schemas.py
-- [ ] T015 Implement MemoryService read/write/edit/delete/reset interface in apps/api/app/services/memory_service.py
-- [ ] T016 [P] Add pytest unit tests for MemoryService interface behavior in apps/api/tests/unit/test_memory_service.py
-- [ ] T017 Implement memory inference confidence-threshold policy as discrete module in apps/api/app/services/memory_inference_policy.py
-- [ ] T018 [P] Add pytest unit tests for confidence-threshold logic in apps/api/tests/unit/test_memory_inference_policy.py
-- [ ] T019 Implement PersonalityEnforcementService (system prompt + tone guard) in apps/api/app/services/personality_enforcement_service.py
-- [ ] T020 [P] Add pytest unit tests for personality enforcement behavior in apps/api/tests/unit/test_personality_enforcement_service.py
-- [ ] T021 Implement model-agnostic LLM adapter (DeepInfra-compatible OpenAI client) in apps/api/app/integrations/llm_adapter.py
-- [ ] T022 [P] Add pytest unit tests for LLM adapter config and fallback behavior in apps/api/tests/unit/test_llm_adapter.py
-- [ ] T023 Implement chat orchestration service wiring MemoryService + PersonalityEnforcement + LLM adapter in apps/api/app/services/chat_service.py
-- [ ] T024 [P] Add pytest unit tests for chat orchestration service in apps/api/tests/unit/test_chat_service.py
-- [ ] T025 Implement SSE streaming endpoint contract handler for /v1/knox/chat/stream in apps/api/app/api/sse/chat_stream.py
-- [ ] T026 [P] Add integration tests for SSE stream chunk contract in apps/api/tests/integration/test_chat_stream_sse.py
-- [ ] T027 Implement SSE interruption retry/resume handling in apps/api/app/services/stream_resume_service.py
-- [ ] T028 [P] Add integration tests for SSE interruption retry/resume in apps/api/tests/integration/test_stream_resume.py
-- [ ] T029 Implement API router composition with orchestration-only route handlers in apps/api/app/api/routes/__init__.py
-- [ ] T030 [P] Add regression snapshots for KNOX personality drift guard in apps/api/tests/regression/test_knox_persona_snapshots.py
+- [x] T009 Create initial Supabase migration for identity-scoped core tables in apps/api/db/migrations/001_knox_core.sql
+- [x] T010 Add row-level security policies for authenticated user_id scoping in apps/api/db/migrations/002_knox_rls.sql
+- [x] T011 Implement Supabase auth dependency (magic-link only session validation) in apps/api/app/api/dependencies/auth.py
+- [x] T012 [P] Add contract test for unauthorized and cross-user access rejection in apps/api/tests/integration/test_auth_scope.py
+- [x] T013 Implement typed core entities for conversations/memory/check-ins in apps/api/app/schemas/core.py
+- [x] T014 [P] Add schema validation tests for core entities in apps/api/tests/unit/test_core_schemas.py
+- [x] T015 Implement MemoryService read/write/edit/delete/reset interface in apps/api/app/services/memory_service.py
+- [x] T016 [P] Add pytest unit tests for MemoryService interface behavior in apps/api/tests/unit/test_memory_service.py
+- [x] T017 Implement memory inference confidence-threshold policy as discrete module in apps/api/app/services/memory_inference_policy.py
+- [x] T018 [P] Add pytest unit tests for confidence-threshold logic in apps/api/tests/unit/test_memory_inference_policy.py
+- [x] T019 Implement PersonalityEnforcementService (system prompt + tone guard) in apps/api/app/services/personality_enforcement_service.py
+- [x] T020 [P] Add pytest unit tests for personality enforcement behavior in apps/api/tests/unit/test_personality_enforcement_service.py
+- [x] T021 Implement model-agnostic LLM adapter (DeepInfra-compatible OpenAI client) in apps/api/app/integrations/llm_adapter.py
+- [x] T022 [P] Add pytest unit tests for LLM adapter config and fallback behavior in apps/api/tests/unit/test_llm_adapter.py
+- [x] T023 Implement chat orchestration service wiring MemoryService + PersonalityEnforcement + LLM adapter in apps/api/app/services/chat_service.py
+- [x] T024 [P] Add pytest unit tests for chat orchestration service in apps/api/tests/unit/test_chat_service.py
+- [x] T025 Implement SSE streaming endpoint contract handler for /v1/knox/chat/stream in apps/api/app/api/sse/chat_stream.py
+- [x] T026 [P] Add integration tests for SSE stream chunk contract in apps/api/tests/integration/test_chat_stream_sse.py
+- [x] T027 Implement SSE interruption retry/resume handling in apps/api/app/services/stream_resume_service.py
+- [x] T028 [P] Add integration tests for SSE interruption retry/resume in apps/api/tests/integration/test_stream_resume.py
+- [x] T029 Implement API router composition with orchestration-only route handlers in apps/api/app/api/routes/__init__.py
+- [x] T030 [P] Add regression snapshots for KNOX personality drift guard in apps/api/tests/regression/test_knox_persona_snapshots.py
 
 **Checkpoint**: Supabase identity/data foundation and backend core services are ready
 
