@@ -16,7 +16,7 @@ Sync Impact Report
 	- None
 -->
 
-# Ayyo Constitution
+# Ayyo AI Constitution
 
 ## Core Principles
 
