@@ -68,18 +68,18 @@
 
 ### Tests for User Story 1
 
-- [ ] T031 [P] [US1] Add API integration test for session message history endpoint in apps/api/tests/integration/test_session_messages.py
-- [ ] T032 [P] [US1] Add frontend integration test for streamed chat rendering and history reload in apps/web/tests/integration/chat_streaming_history.test.tsx
+- [x] T031 [P] [US1] Add API integration test for session message history endpoint in apps/api/tests/integration/test_session_messages.py
+- [x] T032 [P] [US1] Add frontend integration test for streamed chat rendering and history reload in apps/web/tests/integration/chat_streaming_history.test.tsx
 
 ### Implementation for User Story 1
 
-- [ ] T033 [US1] Implement conversation repository for persisted session/message queries in apps/api/app/services/conversation_repository.py
-- [ ] T034 [P] [US1] Add pytest unit tests for conversation repository behavior in apps/api/tests/unit/test_conversation_repository.py
-- [ ] T035 [US1] Implement session messages route /v1/knox/sessions/{sessionId}/messages in apps/api/app/api/routes/sessions.py
-- [ ] T036 [US1] Create KNOX workspace shell page (name/role/character identity) in apps/web/src/features/chat/pages/KnoxWorkspacePage.tsx
-- [ ] T037 [US1] Implement SSE client service for chat stream consumption in apps/web/src/services/chatStreamClient.ts
-- [ ] T038 [US1] Implement chat timeline and composer UI with loading/error/empty states in apps/web/src/features/chat/components/ChatPanel.tsx
-- [ ] T039 [US1] Wire chat feature state management for stream + history persistence in apps/web/src/features/chat/state/chatStore.ts
+- [x] T033 [US1] Implement conversation repository for persisted session/message queries in apps/api/app/services/conversation_repository.py
+- [x] T034 [P] [US1] Add pytest unit tests for conversation repository behavior in apps/api/tests/unit/test_conversation_repository.py
+- [x] T035 [US1] Implement session messages route /v1/knox/sessions/{sessionId}/messages in apps/api/app/api/routes/sessions.py
+- [x] T036 [US1] Create KNOX workspace shell page (name/role/character identity) in apps/web/src/features/chat/pages/KnoxWorkspacePage.tsx
+- [x] T037 [US1] Implement SSE client service for chat stream consumption in apps/web/src/services/chatStreamClient.ts
+- [x] T038 [US1] Implement chat timeline and composer UI with loading/error/empty states in apps/web/src/features/chat/components/ChatPanel.tsx
+- [x] T039 [US1] Wire chat feature state management for stream + history persistence in apps/web/src/features/chat/state/chatStore.ts
 
 **Checkpoint**: US1 is independently demoable and testable
 
