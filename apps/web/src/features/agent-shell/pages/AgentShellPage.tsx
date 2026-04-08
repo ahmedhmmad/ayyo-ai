@@ -5,23 +5,50 @@ import { AgentProfile, agentProfiles } from "../data/agentProfiles";
 type Props = {
   onSelectAgent?: (slug: string) => void;
   overrideProfiles?: AgentProfile[];
+  loadProfiles?: () => Promise<AgentProfile[]>;
 };
 
-export function AgentShellPage({ onSelectAgent, overrideProfiles }: Props) {
+export function AgentShellPage({ onSelectAgent, overrideProfiles, loadProfiles }: Props) {
   const [loading, setLoading] = useState(true);
   const [profiles, setProfiles] = useState<AgentProfile[]>([]);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setProfiles(overrideProfiles ?? agentProfiles);
-      setLoading(false);
-    }, 0);
+    let active = true;
+    const load = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        await new Promise((resolve) => setTimeout(resolve, 0));
+        const next = loadProfiles ? await loadProfiles() : (overrideProfiles ?? agentProfiles);
+        if (!active) {
+          return;
+        }
+        setProfiles(next);
+      } catch {
+        if (!active) {
+          return;
+        }
+        setError("Failed to load agents.");
+      } finally {
+        if (active) {
+          setLoading(false);
+        }
+      }
+    };
 
-    return () => clearTimeout(timer);
-  }, [overrideProfiles]);
+    void load();
+    return () => {
+      active = false;
+    };
+  }, [overrideProfiles, loadProfiles]);
 
   if (loading) {
     return <p data-testid="agent-shell-loading">Loading agents...</p>;
+  }
+
+  if (error) {
+    return <p data-testid="agent-shell-error">{error}</p>;
   }
 
   if (profiles.length === 0) {

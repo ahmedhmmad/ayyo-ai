@@ -77,4 +77,21 @@ describe("CheckInPanel", () => {
       expect(onSubmitToChat).toHaveBeenCalledWith("Recovery framing: reset tonight and hit one walk tomorrow.");
     });
   });
+
+  it("shows error state when check-ins fail to load", async () => {
+    const fetchMock = vi.fn().mockResolvedValueOnce(new Response("boom", { status: 500 }));
+    vi.stubGlobal("fetch", fetchMock);
+
+    render(
+      <CheckInPanel
+        apiBaseUrl="http://localhost:8000"
+        token="11111111-1111-1111-1111-111111111111"
+        onSubmitToChat={vi.fn()}
+      />
+    );
+
+    await waitFor(() => {
+      expect(screen.getByTestId("checkins-error")).toBeInTheDocument();
+    });
+  });
 });

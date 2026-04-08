@@ -31,6 +31,14 @@ describe("AgentShellPage", () => {
     });
   });
 
+  it("shows error state when loading profiles fails", async () => {
+    render(<AgentShellPage loadProfiles={async () => { throw new Error("boom"); }} />);
+
+    await waitFor(() => {
+      expect(screen.getByTestId("agent-shell-error")).toBeInTheDocument();
+    });
+  });
+
   it("opens KNOX workspace on selection", async () => {
     const onSelect = vi.fn();
     render(<AgentShellPage onSelectAgent={onSelect} />);

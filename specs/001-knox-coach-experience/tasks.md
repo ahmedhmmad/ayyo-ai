@@ -205,12 +205,12 @@
 
 **Purpose**: Final quality hardening across all user stories
 
-- [ ] T076 [P] Document API and SSE behavior for consumers in docs/knox-api-overview.md
-- [ ] T077 Validate critical-path coverage threshold (>=80%) across memory/AI/personality paths in apps/api/tests
-- [ ] T078 [P] Refactor modules exceeding 300 lines in apps/api/app and apps/web/src
-- [ ] T079 Validate loading/error/empty states across all shipped UI screens in apps/web/src/features
-- [ ] T080 Validate authenticated user-id memory scoping with adversarial integration tests in apps/api/tests/integration/test_memory_scope_security.py
-- [ ] T081 Run quickstart end-to-end validation checklist in specs/001-knox-coach-experience/quickstart.md
+- [X] T076 [P] Document API and SSE behavior for consumers in docs/knox-api-overview.md
+- [X] T077 Validate critical-path coverage threshold (>=80%) across memory/AI/personality paths in apps/api/tests
+- [X] T078 [P] Refactor modules exceeding 300 lines in apps/api/app and apps/web/src
+- [X] T079 Validate loading/error/empty states across all shipped UI screens in apps/web/src/features
+- [X] T080 Validate authenticated user-id memory scoping with adversarial integration tests in apps/api/tests/integration/test_memory_scope_security.py
+- [X] T081 Run quickstart end-to-end validation checklist in specs/001-knox-coach-experience/quickstart.md
 
 ---
 

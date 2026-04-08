@@ -16,6 +16,7 @@ type Props = {
 
 export function CheckInPanel({ apiBaseUrl, token, onSubmitToChat }: Props) {
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [prompts, setPrompts] = useState<CheckInPrompt[]>([]);
   const [drafts, setDrafts] = useState<Record<string, string>>({});
 
@@ -23,15 +24,29 @@ export function CheckInPanel({ apiBaseUrl, token, onSubmitToChat }: Props) {
     let active = true;
     const load = async () => {
       setLoading(true);
-      const response = await fetch(`${apiBaseUrl}/v1/knox/checkins`, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-      const data = response.ok ? ((await response.json()) as CheckInPrompt[]) : [];
-      if (!active) {
-        return;
+      setError(null);
+      try {
+        const response = await fetch(`${apiBaseUrl}/v1/knox/checkins`, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        if (!response.ok) {
+          throw new Error("failed");
+        }
+        const data = (await response.json()) as CheckInPrompt[];
+        if (!active) {
+          return;
+        }
+        setPrompts(data);
+      } catch {
+        if (!active) {
+          return;
+        }
+        setError("Failed to load check-ins.");
+      } finally {
+        if (active) {
+          setLoading(false);
+        }
       }
-      setPrompts(data);
-      setLoading(false);
     };
 
     void load();
@@ -56,6 +71,7 @@ export function CheckInPanel({ apiBaseUrl, token, onSubmitToChat }: Props) {
     });
 
     if (!response.ok) {
+      setError("Failed to submit check-in response.");
       return;
     }
 
@@ -66,6 +82,10 @@ export function CheckInPanel({ apiBaseUrl, token, onSubmitToChat }: Props) {
 
   if (loading) {
     return <p data-testid="checkins-loading">Loading check-ins...</p>;
+  }
+
+  if (error) {
+    return <p data-testid="checkins-error">{error}</p>;
   }
 
   if (prompts.length === 0) {
