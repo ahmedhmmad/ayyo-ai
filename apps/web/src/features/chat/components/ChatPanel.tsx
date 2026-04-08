@@ -35,6 +35,11 @@ export function ChatPanel({ apiBaseUrl, token, sessionId }: Props) {
     await submitViaComposer(draft);
   };
 
+  const isLongevityText = (text: string) => {
+    const lower = text.toLowerCase();
+    return lower.includes("long-term") || lower.includes("longevity") || lower.includes("years");
+  };
+
   return (
     <section>
       {store.loading && <p data-testid="chat-loading">Loading chat...</p>}
@@ -50,6 +55,8 @@ export function ChatPanel({ apiBaseUrl, token, sessionId }: Props) {
                 <span>assistant: </span>
                 <GuidanceMessageCard content={message.content} loading={store.loading && idx === store.messages.length - 1} />
               </>
+            ) : message.role === "assistant" && isLongevityText(message.content) ? (
+              <span data-testid="longevity-context">{`assistant: ${message.content}`}</span>
             ) : (
               `${message.role}: ${message.content}`
             )}

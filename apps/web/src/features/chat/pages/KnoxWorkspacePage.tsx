@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import { ChatPanel } from "../components/ChatPanel";
+import { VoicePlaceholder } from "../components/VoicePlaceholder";
 import { MemoryPanel } from "../../memory/components/MemoryPanel";
 
 type Props = {
@@ -23,6 +24,7 @@ export function KnoxWorkspacePage({ apiBaseUrl, token, sessionId }: Props) {
         <button type="button" onClick={() => setTab("chat")}>Chat</button>
         <button type="button" onClick={() => setTab("memory")}>Memory</button>
       </nav>
+      <VoicePlaceholder />
       {tab === "chat" ? (
         <ChatPanel apiBaseUrl={apiBaseUrl} token={token} sessionId={sessionId} />
       ) : (

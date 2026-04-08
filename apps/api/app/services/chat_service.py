@@ -6,6 +6,7 @@ from app.services.checkin_service import CheckInService
 from app.services.commitment_service import CommitmentService
 from app.services.conversation_repository import ConversationRepository
 from app.services.guidance_service import GuidanceService
+from app.services.longevity_policy import LongevityPolicy
 from app.services.memory_service import MemoryService
 from app.services.personality_enforcement_service import PersonalityEnforcementService
 
@@ -20,6 +21,7 @@ class ChatService:
         guidance_service: GuidanceService | None = None,
         commitment_service: CommitmentService | None = None,
         checkin_service: CheckInService | None = None,
+        longevity_policy: LongevityPolicy | None = None,
     ) -> None:
         self.memory_service = memory_service
         self.personality_service = personality_service
@@ -28,6 +30,7 @@ class ChatService:
         self.guidance_service = guidance_service or GuidanceService()
         self.commitment_service = commitment_service or CommitmentService()
         self.checkin_service = checkin_service or CheckInService()
+        self.longevity_policy = longevity_policy or LongevityPolicy()
 
     def stream_response(self, user_id: UUID, session_id: UUID, message: str) -> list[StreamChunk]:
         history_messages = self.conversation_repository.list_messages_for_user(session_id=session_id, user_id=user_id)
@@ -51,7 +54,9 @@ class ChatService:
             )
             tokens = [guidance_payload]
         else:
-            tokens = self.llm_adapter.stream_chat(prompt)
+            base_text = "".join(self.llm_adapter.stream_chat(prompt))
+            enriched = self.longevity_policy.apply(message=message, response_text=base_text)
+            tokens = [enriched]
         message_id = uuid4()
         chunks: list[StreamChunk] = []
         assistant_parts: list[str] = []

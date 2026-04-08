@@ -167,13 +167,13 @@
 
 ### Tests for User Story 5
 
-- [ ] T066 [P] [US5] Add frontend integration tests for agent shell selection and Coming Soon states in apps/web/tests/integration/agent_shell.test.tsx
+- [X] T066 [P] [US5] Add frontend integration tests for agent shell selection and Coming Soon states in apps/web/tests/integration/agent_shell.test.tsx
 
 ### Implementation for User Story 5
 
-- [ ] T067 [P] [US5] Implement agent profile data source for shell cards in apps/web/src/features/agent-shell/data/agentProfiles.ts
-- [ ] T068 [US5] Build platform home agent shell with loading/error/empty states in apps/web/src/features/agent-shell/pages/AgentShellPage.tsx
-- [ ] T069 [US5] Add Coming Soon voice placeholder controls in KNOX workspace UI in apps/web/src/features/chat/components/VoicePlaceholder.tsx
+- [X] T067 [P] [US5] Implement agent profile data source for shell cards in apps/web/src/features/agent-shell/data/agentProfiles.ts
+- [X] T068 [US5] Build platform home agent shell with loading/error/empty states in apps/web/src/features/agent-shell/pages/AgentShellPage.tsx
+- [X] T069 [US5] Add Coming Soon voice placeholder controls in KNOX workspace UI in apps/web/src/features/chat/components/VoicePlaceholder.tsx
 
 **Checkpoint**: US5 is independently demoable and testable
 
@@ -187,15 +187,15 @@
 
 ### Tests for User Story 6
 
-- [ ] T070 [P] [US6] Add regression tests for longevity framing in assistant outputs in apps/api/tests/regression/test_longevity_framing.py
-- [ ] T071 [P] [US6] Add frontend integration tests for longevity context rendering in chat messages in apps/web/tests/integration/longevity_context.test.tsx
+- [X] T070 [P] [US6] Add regression tests for longevity framing in assistant outputs in apps/api/tests/regression/test_longevity_framing.py
+- [X] T071 [P] [US6] Add frontend integration tests for longevity context rendering in chat messages in apps/web/tests/integration/longevity_context.test.tsx
 
 ### Implementation for User Story 6
 
-- [ ] T072 [US6] Implement longevity framing policy module in apps/api/app/services/longevity_policy.py
-- [ ] T073 [P] [US6] Add pytest unit tests for longevity policy relevance rules in apps/api/tests/unit/test_longevity_policy.py
-- [ ] T074 [US6] Integrate longevity policy into personality-enforced response pipeline in apps/api/app/services/chat_service.py
-- [ ] T075 [P] [US6] Add pytest unit tests for chat pipeline longevity integration in apps/api/tests/unit/test_chat_longevity_integration.py
+- [X] T072 [US6] Implement longevity framing policy module in apps/api/app/services/longevity_policy.py
+- [X] T073 [P] [US6] Add pytest unit tests for longevity policy relevance rules in apps/api/tests/unit/test_longevity_policy.py
+- [X] T074 [US6] Integrate longevity policy into personality-enforced response pipeline in apps/api/app/services/chat_service.py
+- [X] T075 [P] [US6] Add pytest unit tests for chat pipeline longevity integration in apps/api/tests/unit/test_chat_longevity_integration.py
 
 **Checkpoint**: US6 is independently demoable and testable
 
