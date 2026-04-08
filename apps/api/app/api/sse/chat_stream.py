@@ -6,11 +6,7 @@ from fastapi.responses import StreamingResponse
 
 from app.api.dependencies.auth import AuthContext, get_auth_context
 from app.schemas.core import ChatRequest
-from app.services.chat_service import ChatService
-from app.services.conversation_repository import ConversationRepository
-from app.services.memory_service import MemoryService
-from app.services.personality_enforcement_service import PersonalityEnforcementService
-from app.integrations.llm_adapter import LLMAdapter
+from app.services.service_container import chat_service
 
 
 router = APIRouter(prefix="/knox", tags=["knox-sse"])
@@ -18,8 +14,7 @@ router = APIRouter(prefix="/knox", tags=["knox-sse"])
 
 @router.post("/chat/stream")
 def stream_chat(request: ChatRequest, auth: AuthContext = Depends(get_auth_context)) -> StreamingResponse:
-    service = ChatService(MemoryService(), PersonalityEnforcementService(), LLMAdapter(), ConversationRepository())
-    chunks = service.stream_response(auth.user_id, UUID(str(request.session_id)), request.message)
+    chunks = chat_service.stream_response(auth.user_id, UUID(str(request.session_id)), request.message)
 
     def event_source():
         for chunk in chunks:

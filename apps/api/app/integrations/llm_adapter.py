@@ -19,5 +19,11 @@ class LLMAdapter:
         )
 
     def stream_chat(self, user_message: str) -> list[str]:
+        marker = "MEMORY:"
+        if marker in user_message:
+            memory_text = user_message.split(marker, 1)[1].strip()
+            if memory_text:
+                return ["coach: ", memory_text]
+
         # Deterministic token stream for baseline tests.
         return ["discipline", " starts", " now"] if user_message else ["act"]

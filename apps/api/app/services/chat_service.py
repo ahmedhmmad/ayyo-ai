@@ -1,7 +1,7 @@
 from uuid import UUID, uuid4
 
 from app.integrations.llm_adapter import LLMAdapter
-from app.schemas.core import MemorySourceType, StreamChunk
+from app.schemas.core import StreamChunk
 from app.services.conversation_repository import ConversationRepository
 from app.services.memory_service import MemoryService
 from app.services.personality_enforcement_service import PersonalityEnforcementService
@@ -21,9 +21,12 @@ class ChatService:
         self.conversation_repository = conversation_repository
 
     def stream_response(self, user_id: UUID, session_id: UUID, message: str) -> list[StreamChunk]:
-        _ = self.memory_service.list_records(user_id)
+        records = self.memory_service.list_records(user_id)
+        memory_context = " | ".join(f"{record.key}: {record.value}" for record in records)
+        prompt = message if not memory_context else f"{message}\nMEMORY: {memory_context}"
+
         self.conversation_repository.append_message(session_id, user_id, "user", message)
-        tokens = self.llm_adapter.stream_chat(message)
+        tokens = self.llm_adapter.stream_chat(prompt)
         message_id = uuid4()
         chunks: list[StreamChunk] = []
         assistant_parts: list[str] = []
@@ -46,12 +49,5 @@ class ChatService:
             "".join(assistant_parts),
         )
 
-        self.memory_service.create_record(
-            user_id=user_id,
-            category="health_goal",
-            key="latest_message",
-            value=message,
-            source_type=MemorySourceType.explicit,
-            confidence_score=1.0,
-        )
+        self.memory_service.ingest_message(user_id=user_id, message=message)
         return chunks

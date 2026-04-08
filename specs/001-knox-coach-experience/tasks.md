@@ -93,18 +93,18 @@
 
 ### Tests for User Story 2
 
-- [ ] T040 [P] [US2] Add API integration tests for memory list/update/delete/reset endpoints in apps/api/tests/integration/test_memory_routes.py
-- [ ] T041 [P] [US2] Add frontend integration tests for memory panel CRUD and reset flows in apps/web/tests/integration/memory_panel.test.tsx
+- [X] T040 [P] [US2] Add API integration tests for memory list/update/delete/reset endpoints in apps/api/tests/integration/test_memory_routes.py
+- [X] T041 [P] [US2] Add frontend integration tests for memory panel CRUD and reset flows in apps/web/tests/integration/memory_panel.test.tsx
 
 ### Implementation for User Story 2
 
-- [ ] T042 [US2] Implement memory routes for /v1/knox/memory and /v1/knox/memory/{memoryId} in apps/api/app/api/routes/memory.py
-- [ ] T043 [P] [US2] Add pytest unit tests for memory route orchestration guards in apps/api/tests/unit/test_memory_routes_unit.py
-- [ ] T044 [US2] Extend (do not rewrite) MemoryService from T015 by integrating memory inference policy into the write pipeline in apps/api/app/services/memory_service.py
-- [ ] T045 [P] [US2] Add pytest unit tests for implicit/existing memory merge behavior in apps/api/tests/unit/test_memory_inference_merge.py
-- [ ] T046 [US2] Build memory panel UI with loading/error/empty states in apps/web/src/features/memory/components/MemoryPanel.tsx
-- [ ] T047 [US2] Implement memory API client for list/edit/delete/reset actions in apps/web/src/services/memoryClient.ts
-- [ ] T048 [US2] Wire memory panel into KNOX workspace navigation in apps/web/src/features/chat/pages/KnoxWorkspacePage.tsx
+- [X] T042 [US2] Implement memory routes for /v1/knox/memory and /v1/knox/memory/{memoryId} in apps/api/app/api/routes/memory.py
+- [X] T043 [P] [US2] Add pytest unit tests for memory route orchestration guards in apps/api/tests/unit/test_memory_routes_unit.py
+- [X] T044 [US2] Extend (do not rewrite) MemoryService from T015 by integrating memory inference policy into the write pipeline in apps/api/app/services/memory_service.py
+- [X] T045 [P] [US2] Add pytest unit tests for implicit/existing memory merge behavior in apps/api/tests/unit/test_memory_inference_merge.py
+- [X] T046 [US2] Build memory panel UI with loading/error/empty states in apps/web/src/features/memory/components/MemoryPanel.tsx
+- [X] T047 [US2] Implement memory API client for list/edit/delete/reset actions in apps/web/src/services/memoryClient.ts
+- [X] T048 [US2] Wire memory panel into KNOX workspace navigation in apps/web/src/features/chat/pages/KnoxWorkspacePage.tsx
 
 **Checkpoint**: US2 is independently demoable and testable
 
