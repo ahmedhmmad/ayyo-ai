@@ -141,19 +141,19 @@
 
 ### Tests for User Story 4
 
-- [ ] T056 [P] [US4] Add API integration tests for commitment/check-in event flow in apps/api/tests/integration/test_checkin_event_flow.py
-- [ ] T057 [P] [US4] Add frontend integration tests for check-in prompt/response flows with loading/error/empty states in apps/web/tests/integration/checkins_panel.test.tsx
+- [X] T056 [P] [US4] Add API integration tests for commitment/check-in event flow in apps/api/tests/integration/test_checkin_event_flow.py
+- [X] T057 [P] [US4] Add frontend integration tests for check-in prompt/response flows with loading/error/empty states in apps/web/tests/integration/checkins_panel.test.tsx
 
 ### Implementation for User Story 4
 
-- [ ] T058 [US4] Implement commitment tracking service and persistence in apps/api/app/services/commitment_service.py
-- [ ] T059 [P] [US4] Add pytest unit tests for commitment service transitions in apps/api/tests/unit/test_commitment_service.py
-- [ ] T060 [US4] Implement event-driven check-in generation service in apps/api/app/services/checkin_service.py
-- [ ] T061 [P] [US4] Add pytest unit tests for check-in trigger rules in apps/api/tests/unit/test_checkin_service.py
-- [ ] T062 [US4] Implement check-in routes for list/respond endpoints in apps/api/app/api/routes/checkins.py
-- [ ] T063 [P] [US4] Add pytest unit tests for check-in route orchestration in apps/api/tests/unit/test_checkin_routes_unit.py
-- [ ] T064 [US4] Implement check-in UI module with loading/error/empty states in apps/web/src/features/checkins/components/CheckInPanel.tsx
-- [ ] T065 [US4] Wire check-in prompt responses into chat composer flow in apps/web/src/features/chat/components/ChatPanel.tsx
+- [X] T058 [US4] Implement commitment tracking service and persistence in apps/api/app/services/commitment_service.py
+- [X] T059 [P] [US4] Add pytest unit tests for commitment service transitions in apps/api/tests/unit/test_commitment_service.py
+- [X] T060 [US4] Implement event-driven check-in generation service in apps/api/app/services/checkin_service.py
+- [X] T061 [P] [US4] Add pytest unit tests for check-in trigger rules in apps/api/tests/unit/test_checkin_service.py
+- [X] T062 [US4] Implement check-in routes for list/respond endpoints in apps/api/app/api/routes/checkins.py
+- [X] T063 [P] [US4] Add pytest unit tests for check-in route orchestration in apps/api/tests/unit/test_checkin_routes_unit.py
+- [X] T064 [US4] Implement check-in UI module with loading/error/empty states in apps/web/src/features/checkins/components/CheckInPanel.tsx
+- [X] T065 [US4] Wire check-in prompt responses into chat composer flow in apps/web/src/features/chat/components/ChatPanel.tsx
 
 **Checkpoint**: US4 is independently demoable and testable
 

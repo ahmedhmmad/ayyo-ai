@@ -1,6 +1,7 @@
 import { FormEvent, useEffect, useState } from "react";
 
 import { createChatStore } from "../state/chatStore";
+import { CheckInPanel } from "../../checkins/components/CheckInPanel";
 import { GuidanceMessageCard } from "./GuidanceMessageCard";
 
 type Props = {
@@ -13,19 +14,25 @@ export function ChatPanel({ apiBaseUrl, token, sessionId }: Props) {
   const [store] = useState(() => createChatStore(apiBaseUrl, token, sessionId));
   const [, setTick] = useState(0);
   const [draft, setDraft] = useState("");
+  const [showCheckins, setShowCheckins] = useState(false);
 
   useEffect(() => {
     void store.loadHistory().then(() => setTick((v) => v + 1));
   }, [store]);
 
-  const onSubmit = async (event: FormEvent) => {
-    event.preventDefault();
-    if (!draft.trim()) {
+  const submitViaComposer = async (message: string) => {
+    if (!message.trim()) {
       return;
     }
-    await store.sendMessage(draft.trim());
+    setDraft(message);
+    await store.sendMessage(message.trim());
     setDraft("");
     setTick((v) => v + 1);
+  };
+
+  const onSubmit = async (event: FormEvent) => {
+    event.preventDefault();
+    await submitViaComposer(draft);
   };
 
   return (
@@ -58,6 +65,18 @@ export function ChatPanel({ apiBaseUrl, token, sessionId }: Props) {
         />
         <button type="submit">Send</button>
       </form>
+      <button type="button" onClick={() => setShowCheckins((v) => !v)}>
+        Check-ins
+      </button>
+      {showCheckins && (
+        <CheckInPanel
+          apiBaseUrl={apiBaseUrl}
+          token={token}
+          onSubmitToChat={(text) => {
+            void submitViaComposer(text);
+          }}
+        />
+      )}
     </section>
   );
 }

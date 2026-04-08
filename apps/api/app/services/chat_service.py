@@ -2,6 +2,8 @@ from uuid import UUID, uuid4
 
 from app.integrations.llm_adapter import LLMAdapter
 from app.schemas.core import StreamChunk
+from app.services.checkin_service import CheckInService
+from app.services.commitment_service import CommitmentService
 from app.services.conversation_repository import ConversationRepository
 from app.services.guidance_service import GuidanceService
 from app.services.memory_service import MemoryService
@@ -16,12 +18,16 @@ class ChatService:
         llm_adapter: LLMAdapter,
         conversation_repository: ConversationRepository,
         guidance_service: GuidanceService | None = None,
+        commitment_service: CommitmentService | None = None,
+        checkin_service: CheckInService | None = None,
     ) -> None:
         self.memory_service = memory_service
         self.personality_service = personality_service
         self.llm_adapter = llm_adapter
         self.conversation_repository = conversation_repository
         self.guidance_service = guidance_service or GuidanceService()
+        self.commitment_service = commitment_service or CommitmentService()
+        self.checkin_service = checkin_service or CheckInService()
 
     def stream_response(self, user_id: UUID, session_id: UUID, message: str) -> list[StreamChunk]:
         history_messages = self.conversation_repository.list_messages_for_user(session_id=session_id, user_id=user_id)
@@ -31,6 +37,10 @@ class ChatService:
         prompt = message if not memory_context else f"{message}\nMEMORY: {memory_context}"
 
         self.conversation_repository.append_message(session_id, user_id, "user", message)
+        commitment = self.commitment_service.capture_from_message(user_id=user_id, session_id=session_id, message=message)
+        if commitment is not None:
+            self.checkin_service.generate_for_commitment(commitment)
+
         if self.guidance_service.should_handle(message):
             guidance_payload = self.guidance_service.build_guidance(
                 user_id=user_id,

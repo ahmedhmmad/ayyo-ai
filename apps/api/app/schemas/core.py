@@ -65,7 +65,43 @@ class CheckInOutcome(str, Enum):
     not_complete = "not_complete"
 
 
+class CommitmentStatus(str, Enum):
+    open = "open"
+    completed = "completed"
+    missed = "missed"
+    replaced = "replaced"
+
+
+class CheckInStatus(str, Enum):
+    pending = "pending"
+    answered = "answered"
+    expired = "expired"
+
+
+class CommitmentRecord(BaseModel):
+    id: UUID
+    user_id: UUID = Field(alias="userId")
+    session_id: UUID = Field(alias="sessionId")
+    statement: str
+    status: CommitmentStatus
+    created_at: datetime = Field(alias="createdAt")
+
+
+class CheckInPromptRecord(BaseModel):
+    id: UUID
+    user_id: UUID = Field(alias="userId")
+    commitment_id: UUID = Field(alias="commitmentId")
+    prompt_text: str = Field(alias="promptText")
+    trigger_event: str = Field(alias="triggerEvent")
+    status: CheckInStatus
+    created_at: datetime = Field(alias="createdAt")
+
+
 class CheckInResponseRequest(BaseModel):
     response_text: str = Field(alias="responseText", min_length=1)
     outcome: CheckInOutcome
+
+
+class CheckInResponseOut(BaseModel):
+    follow_up_message: str = Field(alias="followUpMessage")
 
