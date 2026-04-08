@@ -5,6 +5,16 @@
 **Status**: Draft  
 **Input**: User description: "Build KNOX, a specialized AI health and discipline agent inside Ayyo, including chat, memory, personalized guidance, accountability check-ins, platform shell, and longevity framing."
 
+## Clarifications
+
+### Session 2026-04-08
+
+- Q: For first-time entry flow, which should be the default? -> A: Magic link only for MVP; password authentication deferred.
+- Q: For check-in prompt triggering, which model should KNOX use for this release? -> A: Event-based only (trigger from user commitments and outcomes).
+- Q: For this release, what is the scope of voice interaction? -> A: UI placeholder only (non-functional voice controls labeled Coming Soon).
+- Q: For memory inference from conversation, which extraction policy should this release use? -> A: Explicit statements plus high-confidence implicit signals with user-editable memory controls.
+- Q: For guidance plans in this release, where should they be delivered? -> A: In chat only, using structured formatting within chat responses.
+
 ## User Scenarios & Testing *(mandatory)*
 
 <!--
@@ -149,16 +159,18 @@ As an authenticated user, I receive long-term health framing inside normal KNOX 
 - **FR-007**: System MUST scope all memory records to authenticated user identity and prevent cross-user memory access.
 - **FR-008**: Users MUST be able to view, edit, delete individual memory items, and reset all memory from a dedicated memory panel.
 - **FR-009**: System MUST apply relevant memory context in every KNOX response where user-specific context exists.
-- **FR-010**: System MUST generate personalized workout and habit guidance that reflects user goals, constraints, and prior outcomes.
-- **FR-011**: System MUST support follow-up refinement of guidance plans through conversational iteration without losing context.
-- **FR-012**: System MUST generate commitment-based accountability check-ins tied to prior user commitments.
+- **FR-009a**: System MUST infer memory from explicit user statements and high-confidence implicit signals only, and inferred memory MUST remain user-editable in the memory panel.
+- **FR-010**: System MUST generate personalized workout and habit guidance in chat using structured formatting that reflects user goals, constraints, and prior outcomes.
+- **FR-011**: System MUST support follow-up refinement of guidance plans through in-chat conversational iteration without losing context.
+- **FR-012**: System MUST generate accountability check-ins only from commitment/outcome events tied to prior user commitments.
 - **FR-013**: System MUST allow users to respond to check-ins directly in KNOX chat and receive adaptive follow-up based on outcome.
 - **FR-014**: System MUST present non-KNOX agent slots as visible but clearly non-functional Coming Soon entries.
 - **FR-015**: System MUST integrate longevity framing into coaching responses for relevant topics (sleep, nutrition, training, recovery) as part of natural conversation.
 - **FR-016**: System MUST provide explicit user feedback states for loading, empty, and error conditions in chat, memory, and check-in experiences.
 - **FR-017**: System MUST preserve user trust by preventing raw system internals, raw model output, or unformatted metadata from appearing in end-user responses.
 - **FR-018**: System MUST preserve the following as out of scope for this feature release: meal logging/calorie tracking, wearables integration, real phone/video calls, social/community features, and interaction with agents other than KNOX.
-- **FR-019**: System MUST handle user authentication through Supabase Auth using either email/password or magic link sign-in.
+- **FR-019**: System MUST handle user authentication through Supabase Auth using magic link sign-in for this release.
+- **FR-020**: System MUST render voice controls as clearly labeled Coming Soon placeholders and MUST NOT provide functional voice input/output in this release.
 
 ### Constitution Alignment *(mandatory)*
 
@@ -210,10 +222,13 @@ As an authenticated user, I receive long-term health framing inside normal KNOX 
 
 - Users interact with KNOX only after authentication and have one primary personal profile.
 - Authentication onboarding is intentionally minimal for this release and is not treated as a primary product feature.
+- Email/password sign-in is deferred and not included in this release scope.
 - This feature release targets one specialized agent (KNOX) and intentionally excludes live interactions with additional agents.
 - Check-in delivery appears in-app (home/workspace prompts) for this release; external push channels are not required.
+- Fixed time-based check-in scheduling is deferred for this release.
 - Memory records are user-editable and should prefer clarity over exhaustive historical transcript detail.
 - Guidance plans are advisory coaching content and do not replace professional medical diagnosis or treatment.
+- Separate structured guidance plan views are deferred for this release.
 - Standard network variability exists; users may occasionally experience partial streaming interruptions that require retry.
 
 ## Out of Scope
@@ -223,3 +238,5 @@ As an authenticated user, I receive long-term health framing inside normal KNOX 
 - Real phone calls, video calls, or telephony experiences.
 - Social/community features, leaderboards, or peer accountability loops.
 - Any interactive agent beyond KNOX (other slots remain Coming Soon only).
+- Functional voice interaction (input or spoken output).
+- Dedicated guidance plan views outside chat.
