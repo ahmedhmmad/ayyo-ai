@@ -1,0 +1,254 @@
+openapi: 3.1.0
+info:
+  title: Ayyo KNOX API
+  version: 0.1.0
+  description: Contracts for KNOX MVP chat, memory, check-ins, and auth-constrained operations.
+servers:
+  - url: http://localhost:8000
+security:
+  - bearerAuth: []
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    ChatRequest:
+      type: object
+      required: [message, sessionId]
+      properties:
+        sessionId:
+          type: string
+          format: uuid
+        message:
+          type: string
+          minLength: 1
+    StreamChunk:
+      type: object
+      required: [sessionId, messageId, token, done]
+      properties:
+        sessionId:
+          type: string
+          format: uuid
+        messageId:
+          type: string
+          format: uuid
+        token:
+          type: string
+        done:
+          type: boolean
+    MemoryRecord:
+      type: object
+      required: [id, category, key, value, sourceType, confidenceScore]
+      properties:
+        id:
+          type: string
+          format: uuid
+        category:
+          type: string
+          enum: [health_goal, active_routine, struggle, motivation_style, health_priority]
+        key:
+          type: string
+        value:
+          type: string
+        sourceType:
+          type: string
+          enum: [explicit, implicit]
+        confidenceScore:
+          type: number
+          minimum: 0
+          maximum: 1
+    MemoryUpdateRequest:
+      type: object
+      required: [value]
+      properties:
+        value:
+          type: string
+          minLength: 1
+    CheckInPrompt:
+      type: object
+      required: [id, commitmentId, promptText, triggerEvent, status]
+      properties:
+        id:
+          type: string
+          format: uuid
+        commitmentId:
+          type: string
+          format: uuid
+        promptText:
+          type: string
+        triggerEvent:
+          type: string
+          enum: [commitment_created, commitment_due, commitment_missed, user_requested]
+        status:
+          type: string
+          enum: [pending, answered, expired]
+    CheckInResponseRequest:
+      type: object
+      required: [responseText, outcome]
+      properties:
+        responseText:
+          type: string
+          minLength: 1
+        outcome:
+          type: string
+          enum: [complete, partial, not_complete]
+    GuidancePlanView:
+      type: object
+      description: Structured guidance is delivered in chat message content; no dedicated plan view endpoint in MVP.
+      required: [title, steps]
+      properties:
+        title:
+          type: string
+        steps:
+          type: array
+          items:
+            type: object
+            required: [order, action]
+            properties:
+              order:
+                type: integer
+                minimum: 1
+              action:
+                type: string
+              scheduleHint:
+                type: string
+paths:
+  /v1/knox/chat/stream:
+    post:
+      summary: Stream KNOX response tokens for an authenticated user.
+      description: |
+        Emits Server-Sent Events. Route handler orchestrates only; backend applies personality enforcement
+        before any user-visible chunks are emitted.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatRequest'
+      responses:
+        '200':
+          description: text/event-stream response of StreamChunk events.
+          content:
+            text/event-stream:
+              schema:
+                type: string
+        '401':
+          description: Unauthorized.
+  /v1/knox/sessions/{sessionId}/messages:
+    get:
+      summary: Fetch persisted conversation history for session.
+      parameters:
+        - in: path
+          name: sessionId
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Ordered messages for authenticated user-owned session.
+        '404':
+          description: Session not found for user scope.
+  /v1/knox/memory:
+    get:
+      summary: List memory records for authenticated user.
+      responses:
+        '200':
+          description: Memory records.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MemoryRecord'
+    delete:
+      summary: Reset all memory for authenticated user.
+      responses:
+        '204':
+          description: Memory reset completed.
+  /v1/knox/memory/{memoryId}:
+    patch:
+      summary: Update a memory record for authenticated user.
+      parameters:
+        - in: path
+          name: memoryId
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MemoryUpdateRequest'
+      responses:
+        '200':
+          description: Updated memory record.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MemoryRecord'
+    delete:
+      summary: Delete a memory record for authenticated user.
+      parameters:
+        - in: path
+          name: memoryId
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Deleted.
+  /v1/knox/checkins:
+    get:
+      summary: List pending/recent check-in prompts for authenticated user.
+      responses:
+        '200':
+          description: Check-in prompts.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CheckInPrompt'
+  /v1/knox/checkins/{checkInId}/respond:
+    post:
+      summary: Submit check-in response in chat flow.
+      parameters:
+        - in: path
+          name: checkInId
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CheckInResponseRequest'
+      responses:
+        '200':
+          description: Follow-up generated and linked to chat.
+  /v1/knox/voice/status:
+    get:
+      summary: Voice feature status for UI placeholder.
+      responses:
+        '200':
+          description: Always returns Coming Soon in MVP.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [enabled, label]
+                properties:
+                  enabled:
+                    type: boolean
+                    enum: [false]
+                  label:
+                    type: string
+                    enum: [Coming Soon]
