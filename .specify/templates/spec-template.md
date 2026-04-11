@@ -97,24 +97,28 @@
 
 ### Constitution Alignment *(mandatory)*
 
-- **CA-001 Code Quality**: Specify TypeScript strict-mode frontend requirements and typed FastAPI/
+- **CA-001 Code Quality & Styling**: Specify TypeScript strict-mode frontend
+  requirements, Tailwind CSS design-token-driven styling, and typed FastAPI/
   Pydantic backend contracts for this feature.
-- **CA-002 Layer Boundaries**: Identify service/domain ownership and confirm route handlers only
-  orchestrate.
-- **CA-003 Testing**: Define required unit/integration/regression tests, including critical-path
-  coverage impact and persona drift protection where AI prompts are involved.
-- **CA-004 Personality Safety**: If AI output is user-visible, define how personality enforcement
-  and tone guard are applied before rendering.
-- **CA-005 Memory Integration**: If user context is relevant, define memory reads/writes through
-  MemoryService and describe how memory influences responses.
-- **CA-005a Identity Scoping**: Define Supabase Auth identity usage and ensure memory records are
-  scoped to authenticated user IDs.
-- **CA-006 UX Quality**: Include expected loading/error/empty states and consistency expectations for
-  chat/voice interactions if present.
-- **CA-007 Performance**: Define response streaming behavior and measurable latency/performance
-  expectations relevant to the feature.
-- **CA-008 Configuration Governance**: List required environment variables/config and confirm no
-  hardcoded secrets or model/provider values.
+- **CA-002 Layer Boundaries**: Identify service/domain ownership and confirm route
+  handlers only orchestrate.
+- **CA-003 Testing**: Define required unit/integration/regression tests, including
+  critical-path coverage impact and persona drift protection where AI prompts are
+  involved.
+- **CA-004 Personality Safety**: If AI output is user-visible, define how
+  personality enforcement and tone guard are applied before rendering.
+- **CA-005 Memory Integration**: If user context is relevant, define memory
+  reads/writes through MemoryService and describe how memory influences responses.
+- **CA-005a Identity Scoping**: Define Supabase Auth identity usage and ensure
+  memory records are scoped to authenticated user IDs.
+- **CA-006 Human-Centered Design**: Include explicit loading/error/empty states
+  (empathetic, with next-step guidance), jargon-free user-facing text,
+  accessibility compliance (WCAG 2.1 AA contrast, keyboard nav, screen-reader
+  labels), and progress indicators for operations exceeding 200 ms.
+- **CA-007 Performance**: Define response streaming behavior and measurable
+  latency/performance expectations relevant to the feature.
+- **CA-008 Configuration Governance**: List required environment variables/config
+  and confirm no hardcoded secrets or model/provider values.
 
 ### Key Entities *(include if feature involves data)*
 

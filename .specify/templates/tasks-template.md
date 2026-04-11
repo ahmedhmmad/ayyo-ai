@@ -9,7 +9,8 @@ description: "Task list template for feature implementation"
 **Prerequisites**: plan.md (required), spec.md (required for user stories), research.md, data-model.md, contracts/
 
 **Tests**: Tests are REQUIRED when backend services, interactive UI, memory behavior, or AI response
-generation are changed. Include explicit test tasks for those areas.
+generation are changed. Include explicit test tasks for those areas. Accessibility tests (contrast,
+keyboard nav, screen-reader labels) are REQUIRED for any new UI surface.
 
 **Organization**: Tasks are grouped by user story to enable independent implementation and testing of each story.
 
@@ -73,6 +74,7 @@ Examples of foundational tasks (adjust based on your project):
 - [ ] T011 Establish AI personality enforcement path (system prompt + tone guard)
 - [ ] T012 Establish MemoryService abstraction and typed memory contracts
 - [ ] T013 Implement Supabase Auth identity plumbing and authenticated user context propagation
+- [ ] T014 Configure Tailwind design tokens and component styling patterns for new UI surfaces
 
 **Checkpoint**: Foundation ready - user story implementation can now begin in parallel
 
@@ -169,7 +171,9 @@ Examples of foundational tasks (adjust based on your project):
 - [ ] TXXX Security hardening
 - [ ] TXXX Validate critical-path coverage threshold (>=80%)
 - [ ] TXXX Verify frontend/backend files over 300 lines are decomposed
-- [ ] TXXX Validate loading/error/empty states for every touched screen
+- [ ] TXXX Validate loading/error/empty states for every touched screen (empathetic messaging, next-step guidance)
+- [ ] TXXX Validate accessibility compliance (WCAG 2.1 AA contrast, keyboard nav, screen-reader labels)
+- [ ] TXXX Validate Tailwind design tokens used (no hardcoded magic values in class strings)
 - [ ] TXXX Validate memory access control against authenticated user IDs
 - [ ] TXXX Run quickstart.md validation
 

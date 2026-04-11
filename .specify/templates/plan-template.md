@@ -33,6 +33,7 @@
 
 - Verify code-quality architecture rules are planned:
   - React + TypeScript strict mode for frontend scope.
+  - Tailwind CSS with design tokens in tailwind.config.ts for all styling.
   - FastAPI + typed Pydantic contracts for backend scope.
   - No business logic in route handlers; service/domain ownership is explicit.
   - File decomposition strategy exists for modules expected to exceed 300 lines.
@@ -46,10 +47,14 @@
   - Supabase Auth is the user identity authority for memory access.
   - Memory records are scoped and queried by authenticated user ID.
   - Multi-agent-ready abstraction is defined (KNOX as Agent 1 of N).
-- Verify UX/performance constraints are designed:
+- Verify human-centered design and UX/performance constraints:
   - Streaming responses (no blocking full-output wait).
   - FMP target <=2s and approach for measuring it.
-  - Non-functional UI states (loading/error/empty) included.
+  - Loading/error/empty states are explicit and empathetic (explain what, why, next step).
+  - Progress indicators for any operation exceeding 200 ms.
+  - User-facing text is jargon-free and clear for newcomers.
+  - Accessibility: WCAG 2.1 AA contrast, keyboard navigation, screen-reader labels.
+  - Tailwind design tokens define the design system for any new UI surface.
 - Verify boundary and delivery governance:
   - Frontend never calls LLM providers directly.
   - Environment config comes from .env schema, not hardcoded values.
